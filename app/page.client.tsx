@@ -260,6 +260,7 @@ export default function Home({ initialFiles }: HomeProps) {
             onDeleteChapter={handleDeleteChapter}
           />
           <ChapterEditor
+            isLoading={handleStorySelect.isBusy()}
             chapter={selectedChapter}
             onContentChange={handleContentChange}
             onFinalizeSplit={handleFinalizeSplit}

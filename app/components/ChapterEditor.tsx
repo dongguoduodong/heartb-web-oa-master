@@ -5,8 +5,8 @@ import {
   Button,
   Textarea,
   ScrollShadow,
-  ButtonGroup,
   Tooltip,
+  Skeleton,
 } from "@nextui-org/react"
 import { Icon } from "@iconify/react"
 import { cn } from "@/components/cn"
@@ -21,6 +21,7 @@ interface ChapterEditorProps {
   onRedo: () => void
   canUndo: boolean
   canRedo: boolean
+  isLoading: boolean
 }
 
 export const ChapterEditor: React.FC<ChapterEditorProps> = ({
@@ -32,6 +33,7 @@ export const ChapterEditor: React.FC<ChapterEditorProps> = ({
   onRedo,
   canUndo,
   canRedo,
+  isLoading,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -78,14 +80,18 @@ export const ChapterEditor: React.FC<ChapterEditorProps> = ({
               width={24}
             />
           </Button>
-          <h2
-            className={cn(
-              "text-md",
-              !isChapterLoaded ? "text-default-400" : ""
-            )}
-          >
-            {displayTitle}
-          </h2>
+          {isLoading ? (
+            <Skeleton className='h-6 w-48 rounded-lg' />
+          ) : (
+            <h2
+              className={cn(
+                "text-md",
+                !isChapterLoaded ? "text-default-400" : ""
+              )}
+            >
+              {displayTitle}
+            </h2>
+          )}
         </div>
         <Button
           onPress={onFinishImport}
